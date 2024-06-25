@@ -4,7 +4,6 @@ import * as React from "react"
 import {
   CaretSortIcon,
   ChevronDownIcon,
-  DotsHorizontalIcon,
 } from "@radix-ui/react-icons"
 import {
   ColumnDef,
@@ -18,6 +17,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
+import axios from "axios"
 
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -25,9 +25,6 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
@@ -39,48 +36,120 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs"
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@yahoo.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@gmail.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@gmail.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@gmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@hotmail.com",
-  },
-]
-
-export type Payment = {
+// Define the Project type
+export type Project = {
   id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
+  project_name: string
+  status: "Ongoing" | "Completed" | "Delayed"
+  expected_end_date: string
+  percent_complete: number
 }
 
-export const columns: ColumnDef<Payment>[] = [
+const projects: Project[] = [
+    {
+        id: "PROJ-0003",
+        project_name: "New World",
+        status: "Ongoing",
+        expected_end_date: "2024-03-30",
+        percent_complete: 90.554744526
+    },
+    {
+        id: "PROJ-0014",
+        project_name: "Hexa",
+        status: "Ongoing",
+        expected_end_date: "2024-06-05",
+        percent_complete: 100.0
+    },
+    {
+        id: "PROJ-0004",
+        project_name: "Safar Home",
+        status: "Ongoing",
+        expected_end_date: "2024-03-31",
+        percent_complete: 83.013071895
+    },
+    {
+        id: "PROJ-0002",
+        project_name: "Green Land",
+        status: "Ongoing",
+        expected_end_date: "2024-01-31",
+        percent_complete: 34.489092997
+    },
+    {
+        id: "PROJ-0009",
+        project_name: "Glory",
+        status: "Delayed",
+        expected_end_date: "2024-02-29",
+        percent_complete: 100.0
+    },
+    {
+        id: "PROJ-0010",
+        project_name: "OP apartments",
+        status: "Ongoing",
+        expected_end_date: "2024-04-04",
+        percent_complete: 0.0
+    },
+    {
+        id: "PROJ-0005",
+        project_name: "New Oasis",
+        status: "Ongoing",
+        expected_end_date: "2024-02-02",
+        percent_complete: 50.0
+    },
+    {
+        id: "PROJ-0013",
+        project_name: "JST",
+        status: "Completed",
+        expected_end_date: "2024-06-19",
+        percent_complete: 100.0
+    },
+    {
+        id: "PROJ-0006",
+        project_name: "Mini Golf 2",
+        status: "Ongoing",
+        expected_end_date: "2024-02-19",
+        percent_complete: 66.67
+    },
+    {
+        id: "PROJ-0011",
+        project_name: "Nila",
+        status: "Ongoing",
+        expected_end_date: "2024-04-10",
+        percent_complete: 38.46
+    },
+    {
+        id: "PROJ-0012",
+        project_name: "Emmanuel Estate's Interior",
+        status: "Ongoing",
+        expected_end_date: "2024-06-14",
+        percent_complete: 40.0
+    },
+    {
+        id: "PROJ-0008",
+        project_name: "DD Apartments",
+        status: "Completed",
+        expected_end_date: "2024-06-30",
+        percent_complete: 0.0
+    },
+    {
+        id: "PROJ-0001",
+        project_name: "MidLand",
+        status: "Ongoing",
+        expected_end_date: "2024-02-23",
+        percent_complete: 40.0
+    },
+    {
+        id: "PROJ-0007",
+        project_name: "Test PROJ",
+        status: "Ongoing",
+        expected_end_date: "2024-02-28",
+        percent_complete: 100.0
+    }
+];
+
+// Define the columns for the table
+export const columns: ColumnDef<Project>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -104,6 +173,28 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false,
   },
   {
+    accessorKey: "id",
+    header: "Project ID",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("id")}</div>
+    ),
+  },
+  {
+    accessorKey: "project_name",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Project
+          <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
+    cell: ({ row }) => <div className="capitalize ml-4">{row.getValue("project_name")}</div>,
+  },
+  {
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
@@ -111,74 +202,62 @@ export const columns: ColumnDef<Payment>[] = [
     ),
   },
   {
-    accessorKey: "email",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Email
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    accessorKey: "percent_complete",
+    header: "Progress",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("percent_complete")}</div>
+    ),
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    accessorKey: "expected_end_date",
+    header: () => <div className="text-left">End Date</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
-
-      return <div className="text-right font-medium">{formatted}</div>
-    },
-  },
-  {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const payment = row.original
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <DotsHorizontalIcon className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
+      return <div className="text-left font-medium">{row.getValue("expected_end_date")}</div>
     },
   },
 ]
 
+// Main component
 export function DataTableDemo() {
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
+  const [data, setData] = React.useState<Project[]>([])
+  const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState<string | null>(null)
+
+  // Fetch data from the API
+  React.useEffect(() => {
+    // const fetchProjects = async () => {
+    //   try {
+    //     const response = await axios.get(
+    //       'https://buildsuite-dev.app.buildsuite.io/api/method/bs_customisations.api.get_projects_list', 
+    //       {
+    //         headers: {
+    //           Cookie: 'full_name=Admin; sid=1da648d9b405e8fe33f60c06ca05b1f01069546b97c486cd0aa0ec61; system_user=yes; user_id=admin%40test.com; user_image=',
+    //           'Content-Type': 'application/json',
+    //         },
+    //       },
+    //     )
+
+    //     const result = response.data
+
+    //     if (result.message.success_key === 1) {
+    //       setData(result.message.projects)
+    //     } else {
+    //       setError('Failed to fetch projects')
+    //     }
+    //   } catch (err) {
+    //     setError('An error occurred while fetching projects')
+    //   } finally {
+    //     setLoading(false)
+    //   }
+    // }
+
+    // fetchProjects();
+    setData(projects);
+  }, [])
 
   const table = useReactTable({
     data,
@@ -199,14 +278,27 @@ export function DataTableDemo() {
     },
   })
 
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>{error}</p>
+
   return (
-    <div className="w-full">
-      <div className="flex items-center py-4">
+    <Tabs defaultValue="all" className="w-full h-full">
+      <div className="flex items-center pb-4 h-[10%]">
+        <TabsList>
+          <TabsTrigger value="all">All</TabsTrigger>
+          <TabsTrigger value="new">New</TabsTrigger>
+          <TabsTrigger value="ongoing">Ongoing</TabsTrigger>
+          <TabsTrigger value="delayed">Delayed</TabsTrigger>
+          <TabsTrigger value="completed">Completed</TabsTrigger>
+        </TabsList>
+      </div>
+
+      <div className="flex items-center pb-4 h-[10%]">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter Project Name..."
+          value={(table.getColumn("project_name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("project_name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -237,62 +329,65 @@ export function DataTableDemo() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  )
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
+
+      <TabsContent value="all" className="rounded-md border h-[65%] overflow-y-auto">
+        <div>
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </TableHead>
+                    )
+                  })}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      </TabsContent>
+      <div className="flex items-center justify-end space-x-2 py-4 h-[15%]">
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
-        <div className="space-x-2">
+        <div className="flex items-center space-x-2">
           <Button
             variant="outline"
             size="sm"
@@ -311,6 +406,6 @@ export function DataTableDemo() {
           </Button>
         </div>
       </div>
-    </div>
+    </Tabs>
   )
 }

@@ -4,7 +4,7 @@ import "../app/globals.css";
 import { RiBuilding2Fill, RiBuilding2Line, RiCheckLine } from "react-icons/ri";
 import { IoCheckmarkCircleOutline, IoDocumentTextOutline } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
-import { MdEventAvailable, MdOutlineEventAvailable, MdOutlineInventory2 } from "react-icons/md";
+import { MdOutlineEventAvailable, MdOutlineInventory2 } from "react-icons/md";
 import { DataTableDemo } from "@/components/custom/custom-table";
 
 export default function Dashboard() {
@@ -41,12 +41,12 @@ export default function Dashboard() {
         </div>
         
       </div>
-      <div className="w-full h-[100vh] bg-slate-50">
+      <div className="w-full h-[100vh]">
         <div className="w-full h-[7vh]">
 
         </div>
-        <div className="h-[93vh] w-full p-8">
-          <DataTableDemo />
+        <div className="h-[93vh] w-full overflow-y-auto px-8">
+          <DataTableDemo  />
         </div>
       </div>
     </main>
