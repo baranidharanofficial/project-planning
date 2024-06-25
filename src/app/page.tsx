@@ -10,7 +10,7 @@ export default function Login() {
     <div className="flex flex-col items-center justify-center w-full h-[100vh] bg-gradient-to-r from-blue-50 to-green-50">
       <div className="shadow-xl p-8 w-[350px] bg-white rounded-lg flex flex-col items-start justify-center">
         <h1 className="mb-2 text-xl font-semibold">Sign in to BuildSuite</h1>
-        <p className="mb-8 text-sm">Don't have an account? Get started</p>
+        <p className="mb-8 text-sm">Don&apos;t have an account? Get started</p>
 
         <div className="grid w-full max-w-sm items-center gap-1.5">
           <Label htmlFor="email">Email</Label>
