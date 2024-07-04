@@ -1,16 +1,18 @@
 import Image from "next/image";
 
 import "../app/globals.css";
-import { RiBuilding2Fill, RiBuilding2Line, RiCheckLine } from "react-icons/ri";
+import { RiBuilding2Fill } from "react-icons/ri";
 import { IoCheckmarkCircleOutline, IoDocumentTextOutline } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
-import { MdOutlineEventAvailable, MdOutlineInventory2 } from "react-icons/md";
+import { MdDarkMode, MdOutlineEventAvailable, MdOutlineInventory2 } from "react-icons/md";
 import { DataTableDemo } from "@/components/custom/custom-table";
+import ThemeSwitch from "@/components/custom/theme-switch";
+
 
 export default function Dashboard() {
   return (
-    <main className="w-full h-[100vh] flex items-center justify-between box-border">
-      <div className="w-[280px] h-[100vh] shadow-md p-4 relative">
+    <main className="w-full h-[100vh] flex items-center justify-between box-border " >
+      <div className="w-[280px] h-[100vh] shadow-md p-4 relative dark:bg-black">
         <Image priority={true} className="w-[50%] mb-4" src="/images/logo.png" width={150} height={50} alt={""} />
         <p className="text-sm text-slate-400 mb-2 ml-2">Overview</p>
 
@@ -35,18 +37,18 @@ export default function Dashboard() {
           <MdOutlineInventory2 className="text-xl" />
           <p className="ml-2">Stocks</p>
         </div>
-        
+
         <div className=" absolute top-8 right-[-16px] p-2 bg-white shadow-lg hover:shadow-md rounded-full cursor-pointer">
           <IoIosArrowBack className="text-xl" />
         </div>
-        
+
       </div>
       <div className="w-full h-[100vh]">
-        <div className="w-full h-[7vh]">
-
+        <div className="w-full h-[7vh] px-6 flex items-center justify-end">
+          <ThemeSwitch />
         </div>
         <div className="h-[93vh] w-full overflow-y-auto px-8">
-          <DataTableDemo  />
+          <DataTableDemo />
         </div>
       </div>
     </main>
