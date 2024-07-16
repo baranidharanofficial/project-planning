@@ -38,7 +38,6 @@ import {
 } from "@/components/ui/table"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs"
 
-// Define the Project type
 export type Project = {
   id: string
   project_name: string
@@ -48,108 +47,107 @@ export type Project = {
 }
 
 const projects: Project[] = [
-    {
-        id: "PROJ-0003",
-        project_name: "New World",
-        status: "Ongoing",
-        expected_end_date: "2024-03-30",
-        percent_complete: 90.554744526
-    },
-    {
-        id: "PROJ-0014",
-        project_name: "Hexa",
-        status: "Ongoing",
-        expected_end_date: "2024-06-05",
-        percent_complete: 100.0
-    },
-    {
-        id: "PROJ-0004",
-        project_name: "Safar Home",
-        status: "Ongoing",
-        expected_end_date: "2024-03-31",
-        percent_complete: 83.013071895
-    },
-    {
-        id: "PROJ-0002",
-        project_name: "Green Land",
-        status: "Ongoing",
-        expected_end_date: "2024-01-31",
-        percent_complete: 34.489092997
-    },
-    {
-        id: "PROJ-0009",
-        project_name: "Glory",
-        status: "Delayed",
-        expected_end_date: "2024-02-29",
-        percent_complete: 100.0
-    },
-    {
-        id: "PROJ-0010",
-        project_name: "OP apartments",
-        status: "Ongoing",
-        expected_end_date: "2024-04-04",
-        percent_complete: 0.0
-    },
-    {
-        id: "PROJ-0005",
-        project_name: "New Oasis",
-        status: "Ongoing",
-        expected_end_date: "2024-02-02",
-        percent_complete: 50.0
-    },
-    {
-        id: "PROJ-0013",
-        project_name: "JST",
-        status: "Completed",
-        expected_end_date: "2024-06-19",
-        percent_complete: 100.0
-    },
-    {
-        id: "PROJ-0006",
-        project_name: "Mini Golf 2",
-        status: "Ongoing",
-        expected_end_date: "2024-02-19",
-        percent_complete: 66.67
-    },
-    {
-        id: "PROJ-0011",
-        project_name: "Nila",
-        status: "Ongoing",
-        expected_end_date: "2024-04-10",
-        percent_complete: 38.46
-    },
-    {
-        id: "PROJ-0012",
-        project_name: "Emmanuel Estate's Interior",
-        status: "Ongoing",
-        expected_end_date: "2024-06-14",
-        percent_complete: 40.0
-    },
-    {
-        id: "PROJ-0008",
-        project_name: "DD Apartments",
-        status: "Completed",
-        expected_end_date: "2024-06-30",
-        percent_complete: 0.0
-    },
-    {
-        id: "PROJ-0001",
-        project_name: "MidLand",
-        status: "Ongoing",
-        expected_end_date: "2024-02-23",
-        percent_complete: 40.0
-    },
-    {
-        id: "PROJ-0007",
-        project_name: "Test PROJ",
-        status: "Ongoing",
-        expected_end_date: "2024-02-28",
-        percent_complete: 100.0
-    }
+  {
+    id: "PROJ-0003",
+    project_name: "New World",
+    status: "Ongoing",
+    expected_end_date: "2024-03-30",
+    percent_complete: 90.554744526
+  },
+  {
+    id: "PROJ-0014",
+    project_name: "Hexa",
+    status: "Ongoing",
+    expected_end_date: "2024-06-05",
+    percent_complete: 100.0
+  },
+  {
+    id: "PROJ-0004",
+    project_name: "Safar Home",
+    status: "Ongoing",
+    expected_end_date: "2024-03-31",
+    percent_complete: 83.013071895
+  },
+  {
+    id: "PROJ-0002",
+    project_name: "Green Land",
+    status: "Ongoing",
+    expected_end_date: "2024-01-31",
+    percent_complete: 34.489092997
+  },
+  {
+    id: "PROJ-0009",
+    project_name: "Glory",
+    status: "Delayed",
+    expected_end_date: "2024-02-29",
+    percent_complete: 100.0
+  },
+  {
+    id: "PROJ-0010",
+    project_name: "OP apartments",
+    status: "Ongoing",
+    expected_end_date: "2024-04-04",
+    percent_complete: 0.0
+  },
+  {
+    id: "PROJ-0005",
+    project_name: "New Oasis",
+    status: "Ongoing",
+    expected_end_date: "2024-02-02",
+    percent_complete: 50.0
+  },
+  {
+    id: "PROJ-0013",
+    project_name: "JST",
+    status: "Completed",
+    expected_end_date: "2024-06-19",
+    percent_complete: 100.0
+  },
+  {
+    id: "PROJ-0006",
+    project_name: "Mini Golf 2",
+    status: "Ongoing",
+    expected_end_date: "2024-02-19",
+    percent_complete: 66.67
+  },
+  {
+    id: "PROJ-0011",
+    project_name: "Nila",
+    status: "Ongoing",
+    expected_end_date: "2024-04-10",
+    percent_complete: 38.46
+  },
+  {
+    id: "PROJ-0012",
+    project_name: "Emmanuel Estate's Interior",
+    status: "Ongoing",
+    expected_end_date: "2024-06-14",
+    percent_complete: 40.0
+  },
+  {
+    id: "PROJ-0008",
+    project_name: "DD Apartments",
+    status: "Completed",
+    expected_end_date: "2024-06-30",
+    percent_complete: 0.0
+  },
+  {
+    id: "PROJ-0001",
+    project_name: "MidLand",
+    status: "Ongoing",
+    expected_end_date: "2024-02-23",
+    percent_complete: 40.0
+  },
+  {
+    id: "PROJ-0007",
+    project_name: "Test PROJ",
+    status: "Ongoing",
+    expected_end_date: "2024-02-28",
+    percent_complete: 100.0
+  }
 ];
 
-// Define the columns for the table
-export const columns: ColumnDef<Project>[] = [
+const createColumns = (onProjectClick: (projectName: string) => void): ColumnDef<Project>[] => [
   {
     id: "select",
     header: ({ table }) => (
@@ -192,7 +190,11 @@ export const columns: ColumnDef<Project>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="capitalize ml-4">{row.getValue("project_name")}</div>,
+    cell: ({ row }) => (
+      <div className="capitalize ml-4 cursor-pointer hover:underline" onClick={() => onProjectClick(row.getValue("project_name"))}>
+        {row.getValue("project_name")}
+      </div>
+    ),
   },
   {
     accessorKey: "status",
@@ -215,10 +217,13 @@ export const columns: ColumnDef<Project>[] = [
       return <div className="text-left font-medium">{row.getValue("expected_end_date")}</div>
     },
   },
-]
+];
 
-// Main component
-export function DataTableDemo() {
+type DataTableDemoProps = {
+  onProjectClick: (projectName: string) => void;
+};
+
+export function DataTableDemo({ onProjectClick }: DataTableDemoProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -227,37 +232,11 @@ export function DataTableDemo() {
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
 
-  // Fetch data from the API
   React.useEffect(() => {
-    // const fetchProjects = async () => {
-    //   try {
-    //     const response = await axios.get(
-    //       'https://buildsuite-dev.app.buildsuite.io/api/method/bs_customisations.api.get_projects_list', 
-    //       {
-    //         headers: {
-    //           Cookie: 'full_name=Admin; sid=1da648d9b405e8fe33f60c06ca05b1f01069546b97c486cd0aa0ec61; system_user=yes; user_id=admin%40test.com; user_image=',
-    //           'Content-Type': 'application/json',
-    //         },
-    //       },
-    //     )
-
-    //     const result = response.data
-
-    //     if (result.message.success_key === 1) {
-    //       setData(result.message.projects)
-    //     } else {
-    //       setError('Failed to fetch projects')
-    //     }
-    //   } catch (err) {
-    //     setError('An error occurred while fetching projects')
-    //   } finally {
-    //     setLoading(false)
-    //   }
-    // }
-
-    // fetchProjects();
     setData(projects);
   }, [])
+
+  const columns = React.useMemo(() => createColumns(onProjectClick), [onProjectClick]);
 
   const table = useReactTable({
     data,
@@ -342,9 +321,9 @@ export function DataTableDemo() {
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                       </TableHead>
                     )
                   })}

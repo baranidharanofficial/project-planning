@@ -1,6 +1,5 @@
 "use client"
 
-import { ThemeChanger } from "@/components/custom/theme-switch";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,6 +7,7 @@ import axios from "axios";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import "./globals.css";
 
 export default function Login() {
   const t = useTranslations('login');
@@ -58,7 +58,7 @@ export default function Login() {
           </div>
 
 
-          <Button type="submit" className="w-full border-2 bg-green-600 hover:bg-green-600 hover:p-1 hover:border-green-600">Login</Button>
+          <Button type="submit" className="w-full border-2 text-white bg-green-600 hover:bg-green-600 hover:p-1 hover:border-green-600">Login</Button>
         </form>
       </div>
     </div>
